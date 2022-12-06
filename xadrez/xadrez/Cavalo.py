@@ -31,34 +31,34 @@ class Cavalo(Peca):
 
         posicao.definirValores(self.posicao.linha - 1, self.posicao.coluna - 2)        
         if (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
         
         posicao.definirValores(self.posicao.linha - 2, self.posicao.coluna - 1)        
         if (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
         
-        posicao.definirValores(self.posicao.linha - 2, self.posicao.coluna - 1)        
+        posicao.definirValores(self.posicao.linha - 2, self.posicao.coluna + 1)        
         if (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
         
-        posicao.definirValores(self.posicao.linha - 1, self.posicao.coluna - 2)        
+        posicao.definirValores(self.posicao.linha - 1, self.posicao.coluna + 2)        
         if (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
         
-        posicao.definirValores(self.posicao.linha - 1, self.posicao.coluna - 2)        
+        posicao.definirValores(self.posicao.linha + 1, self.posicao.coluna + 2)        
         if (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
         
-        posicao.definirValores(self.posicao.linha - 2, self.posicao.coluna - 1)        
+        posicao.definirValores(self.posicao.linha + 2, self.posicao.coluna + 1)        
         if (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
         
-        posicao.definirValores(self.posicao.linha - 2, self.posicao.coluna - 1)        
+        posicao.definirValores(self.posicao.linha + 2, self.posicao.coluna - 1)        
         if (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
         
-        posicao.definirValores(self.posicao.linha - 1, self.posicao.coluna - 1)        
+        posicao.definirValores(self.posicao.linha + 1, self.posicao.coluna - 2)        
         if (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
         
         return mat

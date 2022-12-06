@@ -43,42 +43,42 @@ class Rei(Peca):
         # ESQUERDA
         posicao.definirValores(self.posicao.linha, self.posicao.coluna - 1)
         if (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
 
         # DIREITA
         posicao.definirValores(self.posicao.linha, self.posicao.coluna + 1)
         if (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
         
         # ACIMA
         posicao.definirValores(self.posicao.linha - 1, self.posicao.coluna)
         if (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
         
         # ABAIXO
         posicao.definirValores(self.posicao.linha + 1, self.posicao.coluna - 1)
         if (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
         
         # NO
         posicao.definirValores(self.posicao.linha - 1, self.posicao.coluna - 1)
         if (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
 
         # NE
         posicao.definirValores(self.posicao.linha - 1, self.posicao.coluna + 1)
         if (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
 
         # SE
         posicao.definirValores(self.posicao.linha + 1, self.posicao.coluna + 1)
         if (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
 
         # SO
         posicao.definirValores(self.posicao.linha + 1, self.posicao.coluna - 1)
         if (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
 
         if (self.qteMovimentos == 0 and not self.partida.xeque):
             posT1 = Posicao(self.posicao.linha, self.posicao.coluna + 3)
@@ -86,7 +86,7 @@ class Rei(Peca):
                 p1 = Posicao(posicao.linha, posicao.coluna + 1)
                 p2 = Posicao(posicao.linha, posicao.coluna + 2)
                 if (self.tabuleiro.peca(p1) == None and self.tabuleiro.peca(p2) == None):
-                    mat[posicao.linha, posicao.coluna + 2] = True
+                    mat[posicao.linha][posicao.coluna + 2] = True
             
             posT2 = Posicao(self.posicao.linha, self.posicao.coluna - 4)
             if (self.testeTorreParaRoque(posT2)):
@@ -95,6 +95,6 @@ class Rei(Peca):
                 p3 = Posicao(posicao.linha, posicao.coluna - 3)
                 
                 if (not any([self.tabuleiro.peca(p1), self.tabuleiro.peca(p2), self.tabuleiro.peca(p3)])):
-                    mat[posicao.linha, posicao.coluna - 2] = True
+                    mat[posicao.linha][posicao.coluna - 2] = True
 
         return mat

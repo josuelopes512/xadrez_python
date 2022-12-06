@@ -35,7 +35,7 @@ class Torre(Peca):
             mat[posicao.linha][posicao.coluna] = True
             if (self.tabuleiro.peca(posicao) != None and self.tabuleiro.peca(posicao).cor != self.cor):
                 break
-            posicao.definirValores(self.posicao.linha, self.posicao.coluna - 1)
+            posicao.linha -= 1
         
         # DIREITA
         posicao.definirValores(self.posicao.linha, self.posicao.coluna + 1)
@@ -43,22 +43,22 @@ class Torre(Peca):
             mat[posicao.linha][posicao.coluna] = True
             if (self.tabuleiro.peca(posicao) != None and self.tabuleiro.peca(posicao).cor != self.cor):
                 break
-            posicao.definirValores(self.posicao.linha, self.posicao.coluna + 1)
+            posicao.linha += 1
         
         # ACIMA
+        posicao.definirValores(self.posicao.linha - 1, self.posicao.coluna)
+        while (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
+            mat[posicao.linha][posicao.coluna] = True
+            if (self.tabuleiro.peca(posicao) != None and self.tabuleiro.peca(posicao).cor != self.cor):
+                break
+            posicao.linha -= 1
+        
+        # ABAIXO
         posicao.definirValores(self.posicao.linha + 1, self.posicao.coluna)
         while (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
             mat[posicao.linha][posicao.coluna] = True
             if (self.tabuleiro.peca(posicao) != None and self.tabuleiro.peca(posicao).cor != self.cor):
                 break
-            posicao.definirValores(self.posicao.linha + 1, self.posicao.coluna)
-        
-        # ABAIXO
-        posicao.definirValores(self.posicao.linha + 1, self.posicao.coluna - 1)
-        while (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha][posicao.coluna] = True
-            if (self.tabuleiro.peca(posicao) != None and self.tabuleiro.peca(posicao).cor != self.cor):
-                break
-            posicao.definirValores(self.posicao.linha + 1, self.posicao.coluna - 1)
+            posicao.linha += 1
         
         return mat

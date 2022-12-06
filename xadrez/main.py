@@ -1,9 +1,9 @@
 import os
 
-from Tela import Tela
-from tabuleiro.TabuleiroException import TabuleiroException
-from xadrez.PartidaXadrez import PartidaXadrez
-from xadrez.RealizarJogada import RealizaJogada
+from xadrez.Tela import Tela
+from xadrez.tabuleiro.TabuleiroException import TabuleiroException
+# from xadrez.PartidaXadrez import PartidaXadrez
+from xadrez.xadrez.RealizarJogada import RealizaJogada
 
 
 try:

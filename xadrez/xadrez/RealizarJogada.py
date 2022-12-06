@@ -1,4 +1,5 @@
 from xadrez.tabuleiro.Cor import Cor
+from xadrez.tabuleiro.Peca import Peca
 from xadrez.tabuleiro.Posicao import Posicao
 from xadrez.tabuleiro.TabuleiroException import TabuleiroException
 from xadrez.utils.Hashset import HashSet
@@ -42,7 +43,7 @@ class RealizaJogada(PartidaXadrez):
         # jogadaespecial en passant
         if (isinstance(p, Peao)):
             if (origem.coluna != destino.coluna and pecaCapturada == None):
-                posP
+                posP = None
                 if (p.cor == Cor.BRANCO):
                     posP = Posicao(destino.linha + 1, destino.coluna)
                 else:
@@ -56,25 +57,49 @@ class RealizaJogada(PartidaXadrez):
     def pecasCapturadas(self, cor):
         aux = HashSet()
         for x in self.capturadas.toList():
-            if (x.cor == cor):
+            peca = self.pecas.get(x)
+
+            if not peca:
+                continue
+
+            if not isinstance(peca, Peca):
+                continue
+
+            if (peca.cor == cor):
                 aux.add(x)
         return aux
 
     def pecasEmJogo(self, cor):
         aux = HashSet()
-        for x in self.pecas:
-            if (x.cor == cor):
+        for x in self.pecas.toList():
+            peca = self.pecas.get(x)
+
+            if not peca:
+                continue
+
+            if not isinstance(peca, Peca):
+                continue
+
+            if (peca.cor == cor):
                 aux.add(x)
         aux.ExceptWith(self.pecasCapturadas(cor))
         return aux
 
     def rei(self, cor):
         for x in self.pecasEmJogo(cor).toList():
-            if (isinstance(x, Rei)):
-                return x
+            peca = self.pecas.get(x)
+
+            if not peca:
+                continue
+
+            if not isinstance(peca, Peca):
+                continue
+
+            if (isinstance(peca, Rei)):
+                return peca
         return None
 
-    def adversaria(cor):
+    def adversaria(self, cor):
         if (cor == Cor.BRANCO):
             return Cor.PRETO
         else:
@@ -86,9 +111,9 @@ class RealizaJogada(PartidaXadrez):
             raise TabuleiroException(
                 "Não tem rei da cor " + cor + " no tabuleiro!")
 
-        for x in self.pecasEmJogo(self.adversaria(cor)):
+        for x in self.pecasEmJogo(self.adversaria(cor)).toList():
             mat = x.movimentosPossiveis()
-            if (mat[R.posicao.linha, R.posicao.coluna]):
+            if (mat[R.posicao.linha][R.posicao.coluna]):
                 return True
         return False
 
@@ -127,20 +152,38 @@ class RealizaJogada(PartidaXadrez):
         R = self.rei(cor)
         if (R == None):
             raise TabuleiroException("Não tem rei da cor " + cor + " no tabuleiro!");
-        for x in self.pecasEmJogo(self.adversaria(cor)):
-            mat = x.movimentosPossiveis()
-            if (mat[R.posicao.linha, R.posicao.coluna]):
+        adv_cor = self.adversaria(cor)
+        for x in self.pecasEmJogo(adv_cor).toList():
+            peca = self.pecas.get(x)
+
+            if not peca:
+                continue
+
+            if not isinstance(peca, Peca):
+                continue
+
+            mat = peca.movimentosPossiveis()
+            if (mat[R.posicao.linha][R.posicao.coluna]):
                 return True
         return False
 
     def testeXequemate(self, cor):
         if (not self.estaEmXeque(cor)):
             return False
-        for x in self.pecasEmJogo(cor):
+        for x in self.pecasEmJogo(cor).toList():
+            peca = self.pecas.get(x)
+
+            if not peca:
+                continue
+
+            if not isinstance(peca, Peca):
+                continue
+
+
             mat = x.movimentosPossiveis()
             for i in range(0, self.tabuleiro.linhas):
                 for j in range(0, self.tabuleiro.colunas):
-                    if (mat[i, j]):
+                    if (mat[i][j]):
                         origem = x.posicao
                         destino = Posicao(i, j)
                         pecaCapturada = self.executarMovimento(origem, destino)

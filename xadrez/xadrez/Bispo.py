@@ -32,7 +32,7 @@ class Bispo(Peca):
         # NO
         posicao.definirValores(self.posicao.linha - 1, self.posicao.coluna - 1)
         while (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
             if (self.tabuleiro.peca(posicao) != None and self.tabuleiro.peca(posicao).cor != self.cor):
                 break
             posicao.definirValores(self.posicao.linha - 1, self.posicao.coluna - 1)
@@ -40,7 +40,7 @@ class Bispo(Peca):
         # NE
         posicao.definirValores(self.posicao.linha - 1, self.posicao.coluna + 1)
         while (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
             if (self.tabuleiro.peca(posicao) != None and self.tabuleiro.peca(posicao).cor != self.cor):
                 break
             posicao.definirValores(self.posicao.linha - 1, self.posicao.coluna + 1)
@@ -48,7 +48,7 @@ class Bispo(Peca):
         # SE
         posicao.definirValores(self.posicao.linha + 1, self.posicao.coluna + 1)
         while (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
             if (self.tabuleiro.peca(posicao) != None and self.tabuleiro.peca(posicao).cor != self.cor):
                 break
             posicao.definirValores(self.posicao.linha + 1, self.posicao.coluna + 1)
@@ -56,7 +56,7 @@ class Bispo(Peca):
         # SO
         posicao.definirValores(self.posicao.linha + 1, self.posicao.coluna - 1)
         while (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
             if (self.tabuleiro.peca(posicao) != None and self.tabuleiro.peca(posicao).cor != self.cor):
                 break
             posicao.definirValores(self.posicao.linha + 1, self.posicao.coluna - 1)

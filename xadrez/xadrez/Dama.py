@@ -32,7 +32,7 @@ class Dama(Peca):
         # ESQUERDA
         posicao.definirValores(self.posicao.linha, self.posicao.coluna - 1)
         while (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
             if (self.tabuleiro.peca(posicao) != None and self.tabuleiro.peca(posicao).cor != self.cor):
                 break
             posicao.definirValores(self.posicao.linha, self.posicao.coluna - 1)
@@ -40,7 +40,7 @@ class Dama(Peca):
         # DIREITA
         posicao.definirValores(self.posicao.linha, self.posicao.coluna + 1)
         while (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
             if (self.tabuleiro.peca(posicao) != None and self.tabuleiro.peca(posicao).cor != self.cor):
                 break
             posicao.definirValores(self.posicao.linha, self.posicao.coluna + 1)
@@ -48,7 +48,7 @@ class Dama(Peca):
         # ACIMA
         posicao.definirValores(self.posicao.linha + 1, self.posicao.coluna)
         while (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
             if (self.tabuleiro.peca(posicao) != None and self.tabuleiro.peca(posicao).cor != self.cor):
                 break
             posicao.definirValores(self.posicao.linha + 1, self.posicao.coluna)
@@ -56,7 +56,7 @@ class Dama(Peca):
         # ABAIXO
         posicao.definirValores(self.posicao.linha + 1, self.posicao.coluna - 1)
         while (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
             if (self.tabuleiro.peca(posicao) != None and self.tabuleiro.peca(posicao).cor != self.cor):
                 break
             posicao.definirValores(self.posicao.linha + 1, self.posicao.coluna - 1)
@@ -64,7 +64,7 @@ class Dama(Peca):
         # NO
         posicao.definirValores(self.posicao.linha - 1, self.posicao.coluna - 1)
         while (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
             if (self.tabuleiro.peca(posicao) != None and self.tabuleiro.peca(posicao).cor != self.cor):
                 break
             posicao.definirValores(self.posicao.linha - 1, self.posicao.coluna - 1)
@@ -72,7 +72,7 @@ class Dama(Peca):
         # NE
         posicao.definirValores(self.posicao.linha - 1, self.posicao.coluna + 1)
         while (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
             if (self.tabuleiro.peca(posicao) != None and self.tabuleiro.peca(posicao).cor != self.cor):
                 break
             posicao.definirValores(self.posicao.linha - 1, self.posicao.coluna + 1)
@@ -80,7 +80,7 @@ class Dama(Peca):
         # SE
         posicao.definirValores(self.posicao.linha + 1, self.posicao.coluna + 1)
         while (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
             if (self.tabuleiro.peca(posicao) != None and self.tabuleiro.peca(posicao).cor != self.cor):
                 break
             posicao.definirValores(self.posicao.linha + 1, self.posicao.coluna + 1)
@@ -88,7 +88,7 @@ class Dama(Peca):
         # SO
         posicao.definirValores(self.posicao.linha + 1, self.posicao.coluna - 1)
         while (self.tabuleiro.posicaoValida(posicao) and self.podeMover(posicao)):
-            mat[posicao.linha, posicao.coluna] = True
+            mat[posicao.linha][posicao.coluna] = True
             if (self.tabuleiro.peca(posicao) != None and self.tabuleiro.peca(posicao).cor != self.cor):
                 break
             posicao.definirValores(self.posicao.linha + 1, self.posicao.coluna - 1)

@@ -58,11 +58,11 @@ class Peao(Peca):
             if (posicao.linha == 3):
                 posicao_esquerda = Posicao(posicao.linha, posicao.coluna - 1)
                 if (self.tabuleiro.posicaoValida(posicao_esquerda) and self.existeInimigo(posicao_esquerda) and self.tabuleiro.peca(posicao_esquerda) == self.partida.vulneravelEnPassant):
-                    mat[posicao.linha - 1, posicao.coluna] = True
+                    mat[posicao.linha - 1][posicao.coluna] = True
 
                 posicao_direita = Posicao(posicao.linha, posicao.coluna + 1)
                 if (self.tabuleiro.posicaoValida(posicao_direita) and self.existeInimigo(posicao_direita) and self.tabuleiro.peca(posicao_direita) == self.partida.vulneravelEnPassant):
-                    mat[posicao.linha - 1, posicao.coluna] = True
+                    mat[posicao.linha - 1][posicao.coluna] = True
         else:
             posicao.definirValores(self.posicao.linha + 1, self.posicao.coluna)
             if (self.tabuleiro.posicaoValida(posicao) and self.tabuleiro.livre(posicao)):
@@ -86,10 +86,10 @@ class Peao(Peca):
             if (posicao.linha == 4):
                 posicao_esquerda = Posicao(posicao.linha, posicao.coluna - 1)
                 if (self.tabuleiro.posicaoValida(posicao_esquerda) and self.existeInimigo(posicao_esquerda) and self.tabuleiro.peca(posicao_esquerda) == self.partida.vulneravelEnPassant):
-                    mat[posicao.linha + 1, posicao.coluna] = True
+                    mat[posicao.linha + 1][posicao.coluna] = True
 
                 posicao_direita = Posicao(posicao.linha, posicao.coluna + 1)
                 if (self.tabuleiro.posicaoValida(posicao_direita) and self.existeInimigo(posicao_direita) and self.tabuleiro.peca(posicao_direita) == self.partida.vulneravelEnPassant):
-                    mat[posicao.linha + 1, posicao.coluna] = True
+                    mat[posicao.linha + 1][posicao.coluna] = True
 
         return mat

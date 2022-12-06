@@ -1,5 +1,5 @@
-from .tabuleiro.Cor import Cor
-from .xadrez.PosicaoXadrez import PosicaoXadrez
+from xadrez.tabuleiro.Cor import Cor
+from xadrez.xadrez.PosicaoXadrez import PosicaoXadrez
 
 class Tela:
     @staticmethod
@@ -19,9 +19,9 @@ class Tela:
             print("Vencedor: " + partida.jogadorAtual)
     
     def lerPosicaoXadrez():
-        s = input()
+        s = input().strip()
         coluna = s[0]
-        linha = int(s[1] + "")
+        linha = int(s[1])
         return PosicaoXadrez(coluna, linha)
     
     @staticmethod
@@ -43,20 +43,40 @@ class Tela:
         Tela.imprimirConjunto(partida.pecasCapturadas(Cor.PRETO))
         print("\n")
     
-    @staticmethod
-    def imprimirTabuleiro(tabuleiro):
-        for i in range(0, tabuleiro.linhas):
-            print(8 - i + " ")
-            for j in range(0, tabuleiro.colunas):
-                Tela.imprimirPeca(tabuleiro.peca(i, j))
-            print("\n")
-        print("  A B C D E F G H")
+    #@staticmethod
+    #def imprimirTabuleiro(tabuleiro):
+    #    for i in range(0, tabuleiro.linhas):
+    #        print(8 - i + " ")
+    #        for j in range(0, tabuleiro.colunas):
+    #            Tela.imprimirPeca(tabuleiro.peca(i, j))
+    #        print("\n")
+    #    print("  A B C D E F G H")
     
     @staticmethod
     def imprimirTabuleiro(tabuleiro, posicoesPossiveis=None):
-        for i in range(0, tabuleiro.linhas):
-            for j in range(0, tabuleiro.colunas):
-                Tela.imprimirPeca(tabuleiro.peca((i, j)))
+        if posicoesPossiveis:
+            for i in range(0, tabuleiro.linhas):
+                x = str(8-i)
+                print(f"{x} ")
+                data_print = ""
+                for j in range(0, tabuleiro.colunas):
+                    peca = tabuleiro.peca((i, j))
+                    if (not peca):
+                        data_print += "- "
+                    else:
+                        data_print += f"{peca} "
+                print(data_print.strip())
+            print("  A B C D E F G H")
+        else:
+            for i in range(0, tabuleiro.linhas):
+                data_print = ""
+                for j in range(0, tabuleiro.colunas):
+                    peca = tabuleiro.peca((i, j))
+                    if (not peca):
+                        data_print += "- "
+                    else:
+                        data_print += f"{peca} "
+                print(data_print.strip())
     
     @staticmethod
     def imprimirPeca(peca):

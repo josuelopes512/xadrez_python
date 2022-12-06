@@ -17,16 +17,7 @@ class Checkingvalues:
     #         self.mathfun.append(key)
     
     def update(self, key):
-        if isinstance(key, object):
-            found = False
-            for k, _ in self.mathfun.items():
-                if key.hash == k:
-                    self.mathfun[k] = key
-                    found = True
-                    break
-            if not found:
-                self.mathfun[key.hash] = key
-        else:
+        if isinstance(key, int):
             found = False
             for k, _ in self.mathfun.items():
                 if key == k:
@@ -35,6 +26,15 @@ class Checkingvalues:
                     break
             if not found:
                 self.mathfun[key] = key
+        elif isinstance(key, object):
+            found = False
+            for k, _ in self.mathfun.items():
+                if key.hash == k:
+                    self.mathfun[k] = key
+                    found = True
+                    break
+            if not found:
+                self.mathfun[key.hash] = key
 
     # get values function
     def get(self, key):
@@ -42,12 +42,24 @@ class Checkingvalues:
             if k == key:
                 return True
         return False
-    # remove values function
 
-    def remove(self, key):
+    def get_item(self, key):
         for k in self.mathfun.keys():
-            if key == k:
-                del self.mathfun[k]
+            if k == key:
+                mat = self.mathfun[k]
+                return mat
+        return None
+
+    # remove values function
+    def remove(self, key):
+        if isinstance(key, object):
+            for k in self.mathfun.keys():
+                if key.hash == k:
+                    del self.mathfun[k]
+        else:
+            for k in self.mathfun.keys():
+                if key == k:
+                    del self.mathfun[k]
 
 # class HashSet main class
 
@@ -61,22 +73,37 @@ class HashSet:
     def hash_values(self, key):
         hash_key = key % self.key_space
         return hash_key
+    
     # add function
-
     def add(self, key):
-        if isinstance(key, object):
+        if isinstance(key, int):
+            self.hash_table[self.hash_values(key)].update(key)
+        elif isinstance(key, object):
             if key.hash:
                 self.hash_table[self.hash_values(key.hash)].update(key)
-        else:
-            self.hash_table[self.hash_values(key)].update(key)
+    
     # remove function
-
     def remove(self, key):
-        self.hash_table[self.hash_values(key)].remove(key)
+        if isinstance(key, int):
+            self.hash_table[self.hash_values(key)].remove(key)
+        elif isinstance(key, object):
+            if key.hash:
+                self.hash_table[self.hash_values(key.hash)].remove(key)
+    
     # contains function
-
     def contains(self, key):
-        return self.hash_table[self.hash_values(key)].get(key)
+        if isinstance(key, int):
+            return self.hash_table[self.hash_values(key)].get(key)
+        elif isinstance(key, object):
+            return self.hash_table[self.hash_values(key.hash)].get(key.hash)
+
+    def get(self, key):
+        if isinstance(key, int):
+            if self.contains(key):
+                return self.hash_table[self.hash_values(key)].get_item(key)
+        elif isinstance(key, object):
+            if self.contains(key.hash):
+                return self.hash_table[self.hash_values(key.hash)].get_item(key.hash)
 
     def display(self):
         ls = []
@@ -89,7 +116,10 @@ class HashSet:
         ls = []
         for i in self.hash_table:
             if i.mathfun:
-                ls.append(i.mathfun.keys())
+                ls += i.mathfun.keys()
+
+        ls = list(set(ls))
+
         return ls
 
     def difference(self, x, y):
@@ -104,6 +134,9 @@ class HashSet:
     def ExceptWith(self, hashList):
         a = self.toList()
         b = hashList.toList()
+
+        if not b:
+            return
         
         for key in self.difference(self.union(a, b), self.difference(a, b)):
             if self.contains(key):
